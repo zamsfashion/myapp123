@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:myapp/ai_page.dart';
+import 'package:myapp/theme_provider.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => ThemeProvider(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -13,7 +21,7 @@ class MyApp extends StatelessWidget {
     const Color electricBlue = Color(0xFF7DF9FF);
 
     return MaterialApp(
-      title: 'Ayaan Ka AI',
+      title: 'Sigma-AI',
       theme: ThemeData(
         primaryColor: electricBlue,
         scaffoldBackgroundColor: Colors.black,
@@ -39,19 +47,19 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: const MyHomePage(),
+      home: const HomePage(),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Ayaan Ka AI'),
+        title: const Text('sigma-ai', style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold)),
       ),
       body: Padding(
         padding: const EdgeInsets.all(24.0),
@@ -68,6 +76,18 @@ class MyHomePage extends StatelessWidget {
               style: Theme.of(context).textTheme.bodyMedium,
             ),
           ],
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const AIPage()),
+            );
+          },
+          child: const Text('Test for Free'),
         ),
       ),
     );
